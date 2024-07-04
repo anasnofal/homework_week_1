@@ -1,27 +1,33 @@
-"""
-###Q1
+## Q1
 docker run --help
 
-Q2
+## Q2
 docker run -it --entrypoint=bash python:3.9
 
 
 
-###Q3
+## Q3
+>Command:
+```sql
 select count(index)
 from green_taxi_trips
-where cast(lpep_pickup_datetime as date) = '2019-09-18' and cast(lpep_dropoff_datetime as date) = '2019-09-18'
+where cast(lpep_pickup_datetime as date) = '2019-09-18' and cast(lpep_dropoff_datetime as date) = '2019-09-18';
+```
 
 
-
-###Q4
+## Q4
+>Command:
+```sql
 SELECT lpep_dropoff_datetime::date,max(lpep_dsropoff_datetime - lpep_pickup_datetime) FROM green_taxi_trips
 where lpep_dropoff_datetime::date =lpep_pickup_datetime::date 
 group by lpep_dropoff_datetime::date
 order by max(lpep_dropoff_datetime - lpep_pickup_datetime) desc
-limit 1
+limit 1;
+```
 
-Q5
+## Q5
+>Command:
+```sql
 SELECT
   sum(t1."total_amount") AS sum_total_amount,
   t2."Borough" AS Boroughs
@@ -30,9 +36,12 @@ FROM public.green_taxi_trips AS t1
 JOIN  public.zone AS t2
   ON t1."PULocationID" = t2."LocationID"
   where not t2."Borough" = 'Unknown' And t1.lpep_pickup_datetime::date = '2019-09-18'
-  group by 2
+  group by 2;
+  ```
 
-Q6
+## Q6
+>Command:
+```sql
 SELECT
   t1.lpep_pickup_datetime,
   t1.lpep_dropoff_datetime,
@@ -50,10 +59,4 @@ JOIN  public.zone AS t3
 WHERE DATE_PART('year',t1.lpep_pickup_datetime::date) ='2019' And DATE_PART('month',t1.lpep_pickup_datetime::date)=9
   and t2."Zone"='Astoria'
   order by t1.tip_amount desc
-
-
-  
-  
-
-
-"""
+```
